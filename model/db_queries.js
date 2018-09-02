@@ -20,7 +20,7 @@ exports.login_db = function login_db(user, callback) {
 			[user.username, user.password],
 			(err, rows) =>{
 				if(!rows[0]) {
-					callback(err,-1);
+					callback(-1);
 				}else {
 					callback(err, rows[0].username, rows[0].type);
 				}

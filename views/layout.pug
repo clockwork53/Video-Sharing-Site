@@ -169,6 +169,12 @@ html
                     if username
                         .welcome-grid
                             h1 Welcome #{username}
+                    else if errorStatus === -1
+                        .welcome-grid
+                            h1 Wrong Username or Password
+                    else if errorStatus !== null
+                        .welcome-grid
+                            h1 contact support # #{errorStatus}
                     .banner-grid.container-fluid
                         .row
                             .col-4

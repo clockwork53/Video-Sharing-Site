@@ -28,6 +28,7 @@ router.post('/login',(req, res) => {
 			console.log(username + privilege);
 			req.session.username = username;
 			req.session.privilege = privilege;
+			req.session.error = err;
 			res.redirect('/');
 		});
 
@@ -58,9 +59,7 @@ router.post('/signup',(req, res) => {
 			privilege:	3
 		};
 		db.register_db(User, (err,status)=>{
-			if(!status){
-				console.log('Success');
-			}
+			req.session.error = err;
 			res.redirect('/');
 		});
 	}else
@@ -79,7 +78,9 @@ router.post('/logout',(req, res)=>{
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-	res.render('index', {title : 'Suranus', username : req.session.username ,bCanUpload: req.session.privilege===1});
+	res.render('index',
+		{title : 'Suranus', username : req.session.username ,
+		bCanUpload: req.session.privilege===1 ,errorStatus: req.session.error});
 });
 
 
