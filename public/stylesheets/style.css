@@ -1,0 +1,104 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+}
+a {
+  color: #00B7FF;
+}
+nav {
+    background-color: #508fdc;
+}
+/**
+    navbar stuff
+ */
+li.nav-item {
+    padding-right: 1px;
+    padding-left: 1px;
+}
+
+ul.navbar-nav {
+    text-align: right;
+}
+.dropdown-menu {
+    max-width: 60%;
+    margin-left: auto;
+}
+/**
+    main grids
+ */
+div.main-body {
+    background-color: #d9dcdc;
+    padding: 0;
+}
+div.main-grids {
+    padding: 0;
+}
+div.welcome-grid {
+    padding: 1em;
+    background-color: #abdde5;
+}
+div.banner-grid {
+    padding: 1em;
+    background-color: #2db696;
+}
+div.news-grid {
+    padding: 1em;
+    background-color: #9fcdff;
+}
+div.top-grid {
+    padding: 1em;
+    background-color: lightgray;
+}
+div.news-grid a.news-title {
+    text-align: right;
+    text-decoration: none;
+}
+div.news-grid a.news-author {
+    text-align: right;
+    text-decoration: none;
+}
+div.news-grid ul {
+    list-style: none;
+}
+.clock {
+    position: absolute;
+    bottom: 40%;
+    left: 5%;
+    display: block;
+    z-index: 9;
+}
+/**
+    glyphicons
+ */
+.glyphicon {
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.fa-film{
+    margin: 0 1em 0 0;
+    font-size: 16px !important;
+}
+.fa-home {
+    margin: 0 1em 0 0;
+    font-size: 16px !important;
+}
+.fa-music {
+    margin: 0 1em 0 0;
+    font-size: 16px !important;
+}
+.news-icon span.fa-envelope{
+    margin: 0 1em 0 0;
+    font-size: 16px !important;
+}
+.fa-arrow-right{
+    margin: 0 0 0 1em;
+    font-size: 11px !important;
+}
