@@ -97,18 +97,55 @@ html
                             button.btn.btn-primary(type='submit') Log Out
         if bCanUpload
             // upload modal
-            #upload-modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+            #upload_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
                 .modal-dialog.modal-dialog-centered(role='document')
                     .modal-content
                         .modal-header
                             h5#exampleModalLongTitle.modal-title Modal title
                             button.close(type='button', data-dismiss='modal', aria-label='Close')
                                 span(aria-hidden='true') ×
-                        .modal-body
-                            | ...
+                        form#upload_form(action='/upload', method='post')
+                            .modal-body
+                                .form-group
+                                    input#username_upload.form-control(type='hidden', title='', required='', name='username' value= username)
+                                .form-group
+                                    label.col-form-label(for='videoTitle_upload') Title :
+                                    input#videoTitle_upload.form-control(type='text', title='', maxlength='15', required='', name='title')
+                                .form-group
+                                    label.col-form-label(for='keywords_upload') Keywords :
+                                    input#keywords_upload.form-control(type='text', title='', maxlength='40', required='', name='keywords')
+                                .form-group
+                                    label.col-form-label(for='category_upload') Category :
+                                        select#category_upload.custom-select(required='', name='category')
+                                            option(selected='', disabled='') -
+                                            option(value='مغز و اعصاب')  مغز و اعصاب
+                                            option(value="ارتوپدی") ارتوپدی
+                                            option(value="داخلی") داخلی
+                                            option(value="قلب و عروق") قلب و عروق
+                                .form-group
+                                    label.col-form-label(for='doctor_upload') Doctor's Name :
+                                    input#doctor_upload.form-control(type='text', title='', maxlength='22', required='', name='doctor')
+                                .form-group
+                                    label.col-form-label(for='description_upload') Description:
+                                    textarea#description_upload.form-control(title='', maxlength='100', required='', name='description')
+                                .form-group
+                                    label.col-form-label(for='file_upload') Select File to Upload:
+                                    input#file_upload.form-control-file(type='file' name='file' class='form-control')
+
+                                div.row
+                                    div.span6
+                                        div#upload_progress.progress.progress-striped.active.hide
+                                            div#upload_progressbar(style='width: 0%')
+                                div.row
+                                    div.span6
+                                        div#upload_alert.alert.hide
+                                            button.close(type='button', data-dismiss='alert') x
+                                            span
+                                                strong#upload_message
+
                         .modal-footer
                             button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-                            button.btn.btn-primary(type='button') Save changes
+                            button.btn.btn-primary(type='button' id='upload_button') Save changes
         // navbar
         nav.navbar.sticky-top.navbar-expand-xl.navbar-dark
             a.navbar-brand(href='#')
@@ -189,6 +226,7 @@ html
 
     script(src='https://code.jquery.com/jquery-3.3.1.min.js')
     script(src='javascripts/parsley.min.js')
+    script(src='javascripts/upload_progressbar.js')
     script.
         $(function () {
              $("[class='form-control tooltip-custom']").tooltip();
@@ -207,8 +245,9 @@ html
         }).on('form:validate', function () {
             $(".needs-validation").addClass('was-validated');
         }).on('form:submit', function () {
-            return false; // Don't submit form for this demo
+            //return false; // Don't submit form for this demo
         });
+
     script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49', crossorigin='anonymous')
     script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')
 
