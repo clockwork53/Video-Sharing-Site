@@ -75,6 +75,18 @@ router.post('/logout',(req, res)=>{
 	})
 });
 
+/* POST upload*/
+router.post('/upload', (req, res)=>{
+	console.log(req.body);
+	if(
+		true
+	){
+		let Video ={
+			title = req.body.
+		};
+	}
+});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
