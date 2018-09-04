@@ -39,3 +39,22 @@ exports.register_db = function register_db(user, callback) {
 		});
 	}
 };
+
+exports.upload_video = function upload_video(video, callback) {
+	if(!bConnected)
+		return -1;
+	else{
+		connection.query("SELECT type FROM users WHERE username = ?",
+			[video.username],
+			(err)=>{
+			if(err)
+				callback(err);
+			else if(!err)
+				connection.query("INSERT INTO videos (title, category, description, uuid, perma_link, keywords, doctor_name) VALUES (?, ?, ?, ?, ?, ?, ?)",
+					[video.title, video.category, video.description, video.username, video.fileAddr, video.keywords, video.doctor],
+					(err)=>{
+						callback(err);
+				});
+		});
+	}
+};

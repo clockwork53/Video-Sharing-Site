@@ -3,7 +3,8 @@ const passwordValidator = require('password-validator');
 const express = require('express');
 const router = express.Router();
 const db = require('../model/db_queries');
-
+const multer = require('multer');
+//TODO: use passport library for authentication
  /*
  * 	set conditions for password
  * */
@@ -12,7 +13,7 @@ passcheck.is().min(6)
 	.is().max(20)
 	.has().not().spaces()
 	.is().not().oneOf(['1234567']);
-
+//TODO: add guest mode... maybe?
 /* POST login */
 router.post('/login',(req, res) => {
 
@@ -34,6 +35,7 @@ router.post('/login',(req, res) => {
 
 	}
 });
+//TODO: use ajax to let user know what went wrong (duplicate name, email, etc)
 /* POST signup */
 router.post('/signup',(req, res) => {
 	console.log(req.body);
@@ -65,6 +67,7 @@ router.post('/signup',(req, res) => {
 	}else
 		console.log('oops');
 });
+//TODO: check if anyone is actually logged in!
 /* POST logout*/
 router.post('/logout',(req, res)=>{
 	req.session.destroy((err)=>{
@@ -75,15 +78,57 @@ router.post('/logout',(req, res)=>{
 	})
 });
 
+// multer setup
+const multerConfig = {
+
+	storage: multer.diskStorage({
+		//Setup where the user's file will go
+		destination: function(req, file, next){
+			next(null, '../public/video-storage');
+		},
+
+		//Then give the file a unique name
+		filename: function(req, file, next){
+			console.log(file);
+			const ext = file.mimetype.split('/')[1];
+			next(null, file.fieldname + '-' + Date.now() + '.'+ext);
+		}
+	}),
+
+	//A means of ensuring only images are uploaded.
+	fileFilter: function(req, file, next){
+		if(!file){
+			next();
+		}
+		const video = file.mimetype.startsWith('video/');
+		if(video){
+			console.log('video uploaded');
+			next(null, true);
+		}else{
+			console.log("file not supported");
+
+			//TODO:  A better message response to user on failure.
+			return next();
+		}
+	}
+};
 /* POST upload*/
-router.post('/upload', (req, res)=>{
+router.post('/upload', multer(multerConfig).single('file'), (req, res)=>{
 	console.log(req.body);
 	if(
+		//TODO: check conditions for file upload
 		true
 	){
 		let Video ={
-			title = req.body.
+			username: req.body.username,
+			title: req.body.title,
+			keywords: req.body.keywords,
+			category: req.body.category,
+			doctor: req.body.doctor,
+			description: req.body.description,
+			fileAddr: req.file.filename
 		};
+
 	}
 });
 

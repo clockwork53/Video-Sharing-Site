@@ -1,32 +1,33 @@
-$(function () {
+$(document).ready(function () {
 
-	let showInfo = (message)=>{
+	var showInfo = function(message){
 		$('#upload_progress').hide();
 		$('#upload_message').text(message);
 		$('#upload_alert').show();
 	};
 
-	$("#upload_button").on('click', (event)=>{
+	$("#upload_button").on('click', function(event){
 		event.preventDefault();
 		$('#upload_progress').show();
-		let uploadData = new FormData();
-		let file = document.getElementsByName('file').files[0];
-		uploadData.append('file', file);
+		var form = $('#upload_form')[0];
+		var uploadData = new FormData(form);
+		//let file = document.getElementsByName('file').files[0];
+		//uploadData.append('file', file);
 
 		let ajaxReq = new XMLHttpRequest();
 
-		ajaxReq.upload.onprogress = (progress)=>{
+		ajaxReq.upload.onprogress = function(progress){
 			if(progress.lengthComputable){
-				let percentage = (progress.loaded / progress.total) * 100;
+				var percentage = (progress.loaded / progress.total) * 100;
 				$("#upload_progress #upload_progressbar").css('width', percentage + '%');
 			}
 		};
 
-		ajaxReq.onerror = (progress)=>{
+		ajaxReq.onerror = function(){
 			showInfo('An error occurred while submitting the form. Maybe your file is too big');
 		};
 
-		ajaxReq.onload = (progress)=>{
+		ajaxReq.onload = function(){
 			showInfo(this.statusText);
 		};
 

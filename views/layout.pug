@@ -5,13 +5,13 @@ html
         meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
         meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
         meta(name='keywords', content='Medical Learn Teach')
-        script(type='application/x-javascript').
+        script(src='javascripts/jquery-3.3.1.js')
+        script.
             addEventListener("load", function () {
-                setTimeout(hideURLbar, 0);
+                 setTimeout(hideURLbar, 0);
             }, false); function hideURLbar() {
-                window.scrollTo(0, 1);
+                 window.scrollTo(0, 1);
             }
-
         // bootstrap
         link(rel='stylesheet', href='stylesheets/bootstrap.min.css')
         link(rel='stylesheet', href='stylesheets/style.css')
@@ -104,7 +104,7 @@ html
                             h5#exampleModalLongTitle.modal-title Modal title
                             button.close(type='button', data-dismiss='modal', aria-label='Close')
                                 span(aria-hidden='true') ×
-                        form#upload_form(action='/upload', method='post')
+                        form#upload_form(action='/upload', enctype='multipart/form-data', method='post')
                             .modal-body
                                 .form-group
                                     input#username_upload.form-control(type='hidden', title='', required='', name='username' value= username)
@@ -145,7 +145,7 @@ html
 
                         .modal-footer
                             button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-                            button.btn.btn-primary(type='button' id='upload_button') Save changes
+                            button.btn.btn-primary(type='submit' id='upload_button') Save changes
         // navbar
         nav.navbar.sticky-top.navbar-expand-xl.navbar-dark
             a.navbar-brand(href='#')
@@ -199,56 +199,52 @@ html
                         .dropdown-menu(aria-labelledby='navbarDropdown')
                             a.dropdown-item(href='#') -
 
-    .container-fluid(style='margin: 0')
-        .row
-            #main-body.col-sm-12.main-body
-                .main-grids
-                    if username
-                        .welcome-grid
-                            h1 Welcome #{username}
-                    else if errorStatus === -1
-                        .welcome-grid
-                            h1 Wrong Username or Password
-                    else if errorStatus !== null
-                        .welcome-grid
-                            h1 contact support # #{errorStatus}
-                    .banner-grid.container-fluid
-                        .row
-                            .col-4
-                                h1 Suranus
-                                p Watch. Learn. Repeat.
-                            .col-auto
-                                img(src='images/menu-animated.gif', alt='')
+        .container-fluid(style='margin: 0')
+            .row
+                #main-body.col-sm-12.main-body
+                   .main-grids
+                        if username
+                            .welcome-grid
+                                h1 Welcome #{username}
+                        else if errorStatus === -1
+                            .welcome-grid
+                                h1 Wrong Username or Password
+                        else if errorStatus !== null
+                            .welcome-grid
+                                h1 contact support # #{errorStatus}
+                        .banner-grid.container-fluid
+                            .row
+                                .col-4
+                                    h1 Suranus
+                                    p Watch. Learn. Repeat.
+                                .col-auto
+                                    img(src='images/menu-animated.gif', alt='')
 
 
-    block content
-
-
-    script(src='https://code.jquery.com/jquery-3.3.1.min.js')
-    script(src='javascripts/parsley.min.js')
-    script(src='javascripts/upload_progressbar.js')
-    script.
-        $(function () {
-             $("[class='form-control tooltip-custom']").tooltip();
-        });
-        $(".needs-validation").parsley({
-            errorClass: 'has-danger',
-            successClass: 'has-success',
-            classHandler: function (ParsleyField) {
-                 return ParsleyField.$element.closest('.form-group');
-            },
-            errorsContainer: function (ParsleyField) {
-                return ParsleyField.$element.closest('.form-group');
-            },
-            errorsWrapper: '<span class="form-text text-danger"></span>',
-            errorTemplate: '<span></span>'
-        }).on('form:validate', function () {
-            $(".needs-validation").addClass('was-validated');
-        }).on('form:submit', function () {
-            //return false; // Don't submit form for this demo
-        });
-
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49', crossorigin='anonymous')
-    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')
+        block content
+        script(src='javascripts/parsley.min.js')
+        script(src='javascripts/upload_progressbar.js')
+        script.
+            $(function () {
+                $("[class='form-control tooltip-custom']").tooltip();
+            });
+            $(".needs-validation").parsley({
+                errorClass: 'has-danger',
+                successClass: 'has-success',
+                classHandler: function (ParsleyField) {
+                    return ParsleyField.$element.closest('.form-group');
+                },
+                errorsContainer: function (ParsleyField) {
+                    return ParsleyField.$element.closest('.form-group');
+                },
+                errorsWrapper: '<span class="form-text text-danger"></span>',
+                errorTemplate: '<span></span>'
+            }).on('form:validate', function () {
+                $(".needs-validation").addClass('was-validated');
+            }).on('form:submit', function () {
+                //return false; // Don't submit form for this demo
+            });
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', integrity='sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49', crossorigin='anonymous')
+        script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', integrity='sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy', crossorigin='anonymous')
 
 
