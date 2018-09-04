@@ -1,6 +1,9 @@
 $(document).ready(function () {
 
-	var showInfo = function(message){
+	let progressbar = $("#upload_progressbar");
+	let progressbarText = $("#upload_progressbar_text");
+
+	let showInfo = function(message){
 		$('#upload_progress').hide();
 		$('#upload_message').text(message);
 		$('#upload_alert').show();
@@ -8,18 +11,22 @@ $(document).ready(function () {
 
 	$("#upload_button").on('click', function(event){
 		event.preventDefault();
+		event.stopImmediatePropagation();
+
 		$('#upload_progress').show();
-		var form = $('#upload_form')[0];
-		var uploadData = new FormData(form);
+		let form = $('#upload_form')[0];
+		let uploadData = new FormData(form);
 		//let file = document.getElementsByName('file').files[0];
 		//uploadData.append('file', file);
 
 		let ajaxReq = new XMLHttpRequest();
+		ajaxReq.open('POST', '/upload', true);
 
 		ajaxReq.upload.onprogress = function(progress){
 			if(progress.lengthComputable){
-				var percentage = (progress.loaded / progress.total) * 100;
-				$("#upload_progress #upload_progressbar").css('width', percentage + '%');
+				let percentage = (progress.loaded / progress.total) * 100;
+				progressbar.attr({'style':'width: '+ percentage +'%;', 'aria-valuenow': percentage});
+				progressbarText.text(Math.round(percentage) + '%');
 			}
 		};
 

@@ -84,7 +84,7 @@ const multerConfig = {
 	storage: multer.diskStorage({
 		//Setup where the user's file will go
 		destination: function(req, file, next){
-			next(null, '../public/video-storage');
+			next(null, './public/video-storage');
 		},
 
 		//Then give the file a unique name
@@ -128,7 +128,9 @@ router.post('/upload', multer(multerConfig).single('file'), (req, res)=>{
 			description: req.body.description,
 			fileAddr: req.file.filename
 		};
-
+		db.upload_video(Video, ()=>{
+			res.redirect('/');
+		});
 	}
 });
 
