@@ -62,11 +62,6 @@ router.post('/signup',(req, res) => {
 			privilege:	3
 		};
 		db.register_db(User, (err,status)=>{
-			// noinspection JSUnresolvedVariable
-			// noinspection JSUnresolvedVariable
-			// noinspection JSUnresolvedVariable
-			// noinspection JSUnresolvedVariable
-			// noinspection JSUnresolvedVariable
 			req.session.error = err;
 			res.redirect('/');
 		});

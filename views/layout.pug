@@ -5,7 +5,7 @@ html
         meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
         meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
         meta(name='keywords', content='Medical Learn Teach')
-        script(src='javascripts/jquery-3.3.1.js')
+        script(src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js')
         script.
             addEventListener("load", function () {
                  setTimeout(hideURLbar, 0);
@@ -25,206 +25,219 @@ html
         script(src='javascripts/upload_progressbar.js')
 
     body
-        if !username
-            // login modal
-            #login_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
-                .modal-dialog.modal-dialog-centered(role='document')
-                    .modal-content
-                        .modal-header
-                            h5.modal-title Login
-                            button.close(type='button', data-dismiss='modal', aria-label='Close')
-                                span(aria-hidden='true') ×
-                        form#login_form.needs-validation(action='/login', method='post', novalidate='')
-                            .modal-body
-                                .form-group
-                                    label.col-form-label(for='username_login') Username :
-                                    input#username_login.form-control(type='text', title='', maxlength='15', required='', name='username')
-                                .form-group
-                                    label.col-form-label(for='password_login') Password :
-                                    input#password_login.form-control(type='password', title='', minlength='6', maxlength='20', required='', name='password')
-                            .modal-footer
-                                button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-                                button.btn.btn-primary(type='submit') Login
-            // signup modal
-            #signup_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
-                .modal-dialog.modal-dialog-centered(role='document')
-                    .modal-content
-                        .modal-header
-                            h5.modal-title Sign Up
-                            button.close(type='button', data-dismiss='modal', aria-label='Close')
-                                span(aria-hidden='true') ×
-                        form#signup_form.needs-validation(action='/signup', method='post', novalidate='')
-                            .modal-body
-                                .form-group
-                                    label.col-form-label(for='username_signup') Username :
-                                    input#username_signup.form-control(type='text', title='', maxlength='15', required='', name='username')
-                                .form-group
-                                    label.col-form-label(for='email_signup') Email :
-                                    input#email_signup.form-control(type='email', title='', maxlength='25', required='', name='email')
-                                .form-group
-                                    label.col-form-label(for='fName_signup') First Name :
-                                    input#fName_signup.form-control(type='text', title='', maxlength='20', required='', name='fName')
-                                .form-group
-                                    label.col-form-label(for='lName_signup') Last Name :
-                                    input#lName_signup.form-control(type='text', title='', maxlength='22', required='', name='lName')
-                                .form-group
-                                    label.col-form-label(for='telNum_signup') Telephone :
-                                    input#telNum_signup.form-control(type='tel', title='', minlength='7', maxlength='10', required='', name='telNum')
-                                .form-group
-                                    label.col-form-label(for='alma_signup') Alma :
-                                    select#alma_signup.custom-select(required='', name='alma')
-                                        option(selected='', disabled='') -
-                                        option(value='md') master
-                                        option(value='phd') phd
-                                        option(value='bch') bch
-                                .form-group
-                                    label.col-form-label(for='password_signup') Password :
-                                    input#password_signup.form-control.tooltip-custom(type='password', title='', minlength='6', maxlength='20', required='', name='password')
-                                    small.text-muted
-                                        | Must be 6-20 characters long.
-                                .form-group
-                                    label.col-form-label(for='re_password_signup') Confirm Password :
-                                    input#re_password_signup.form-control(type='password', data-parsley-equalto='#password_signup', required='')
-                            .modal-footer
-                                button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-                                button.btn.btn-primary(type='submit') Sign Up
-        else
-            // logout modal
-            #logout_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel', aria-hidden='true')
-                .modal-dialog.modal-sm
-                    .modal-content
-                        form#logout_form(action='/logout', method='post')
-                            button.btn.btn-primary(type='submit') Log Out
-        if bCanUpload
-            // upload modal
-            #upload_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
-                .modal-dialog.modal-dialog-centered(role='document')
-                    .modal-content
-                        .modal-header
-                            h5#exampleModalLongTitle.modal-title Upload Video
-                            button.close(type='button', data-dismiss='modal', aria-label='Close')
-                                span(aria-hidden='true') ×
-                        form#upload_form(action='/upload', enctype='multipart/form-data', method='post')
-                            .modal-body
-                                .form-group
-                                    input#username_upload.form-control(type='hidden', title='', required='', name='username' value= username)
-                                .form-group
-                                    label.col-form-label(for='videoTitle_upload') Title :
-                                    input#videoTitle_upload.form-control(type='text', title='', maxlength='15', required='', name='title')
-                                .form-group
-                                    label.col-form-label(for='keywords_upload') Keywords :
-                                    input#keywords_upload.form-control(type='text', title='', maxlength='40', required='', name='keywords')
-                                .form-group
-                                    label.col-form-label(for='category_upload') Category :
-                                        select#category_upload.custom-select(required='', name='category')
+        #loading-banner.hidden
+            .container
+                .row
+                    #loader
+                        .dot
+                        .dot
+                        .dot
+                        .dot
+                        .dot
+                        .dot
+                        .dot
+                        .dot
+                        .lading
+
+        #main-page
+            if !username
+                // login modal
+                #login_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                    .modal-dialog.modal-dialog-centered(role='document')
+                        .modal-content
+                            .modal-header
+                                h5.modal-title Login
+                                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                    span(aria-hidden='true') ×
+                            form#login_form.needs-validation(action='/login', method='post', novalidate='')
+                                .modal-body
+                                    .form-group
+                                        label.col-form-label(for='username_login') Username :
+                                        input#username_login.form-control(type='text', title='', maxlength='15', required='', name='username')
+                                    .form-group
+                                        label.col-form-label(for='password_login') Password :
+                                        input#password_login.form-control(type='password', title='', minlength='6', maxlength='20', required='', name='password')
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                    button.btn.btn-primary(type='submit') Login
+                // signup modal
+                #signup_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                    .modal-dialog.modal-dialog-centered(role='document')
+                        .modal-content
+                            .modal-header
+                                h5.modal-title Sign Up
+                                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                    span(aria-hidden='true') ×
+                            form#signup_form.needs-validation(action='/signup', method='post', novalidate='')
+                                .modal-body
+                                    .form-group
+                                        label.col-form-label(for='username_signup') Username :
+                                        input#username_signup.form-control(type='text', title='', maxlength='15', required='', name='username')
+                                    .form-group
+                                        label.col-form-label(for='email_signup') Email :
+                                        input#email_signup.form-control(type='email', title='', maxlength='25', required='', name='email')
+                                    .form-group
+                                        label.col-form-label(for='fName_signup') First Name :
+                                        input#fName_signup.form-control(type='text', title='', maxlength='20', required='', name='fName')
+                                    .form-group
+                                        label.col-form-label(for='lName_signup') Last Name :
+                                        input#lName_signup.form-control(type='text', title='', maxlength='22', required='', name='lName')
+                                    .form-group
+                                        label.col-form-label(for='telNum_signup') Telephone :
+                                        input#telNum_signup.form-control(type='tel', title='', minlength='7', maxlength='10', required='', name='telNum')
+                                    .form-group
+                                        label.col-form-label(for='alma_signup') Alma :
+                                        select#alma_signup.custom-select(required='', name='alma')
                                             option(selected='', disabled='') -
-                                            option(value='مغز و اعصاب')  مغز و اعصاب
-                                            option(value="ارتوپدی") ارتوپدی
-                                            option(value="داخلی") داخلی
-                                            option(value="قلب و عروق") قلب و عروق
-                                .form-group
-                                    label.col-form-label(for='doctor_upload') Doctor's Name :
-                                    input#doctor_upload.form-control(type='text', title='', maxlength='22', required='', name='doctor')
-                                .form-group
-                                    label.col-form-label(for='description_upload') Description:
-                                    textarea#description_upload.form-control(title='', maxlength='100', required='', name='description')
-                                .form-group
-                                    label.col-form-label(for='file_upload') Select File to Upload:
-                                    input#file_upload.form-control-file(type='file' name='file' class='form-control')
+                                            option(value='md') master
+                                            option(value='phd') phd
+                                            option(value='bch') bch
+                                    .form-group
+                                        label.col-form-label(for='password_signup') Password :
+                                        input#password_signup.form-control.tooltip-custom(type='password', title='', minlength='6', maxlength='20', required='', name='password')
+                                        small.text-muted
+                                            | Must be 6-20 characters long.
+                                    .form-group
+                                        label.col-form-label(for='re_password_signup') Confirm Password :
+                                        input#re_password_signup.form-control(type='password', data-parsley-equalto='#password_signup', required='')
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                    button.btn.btn-primary(type='submit' id='signup_button') Sign Up
+            else
+                // logout modal
+                #logout_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel', aria-hidden='true')
+                    .modal-dialog.modal-sm
+                        .modal-content
+                            form#logout_form(action='/logout', method='post')
+                                button.btn.btn-primary(type='submit') Log Out
+            if bCanUpload
+                // upload modal
+                #upload_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
+                    .modal-dialog.modal-dialog-centered(role='document')
+                        .modal-content
+                            .modal-header
+                                h5#exampleModalLongTitle.modal-title Upload Video
+                                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                                    span(aria-hidden='true') ×
+                            form#upload_form(action='/upload', enctype='multipart/form-data', method='post')
+                                .modal-body
+                                    .form-group
+                                        input#username_upload.form-control(type='hidden', title='', required='', name='username' value= username)
+                                    .form-group
+                                        label.col-form-label(for='videoTitle_upload') Title :
+                                        input#videoTitle_upload.form-control(type='text', title='', maxlength='15', required='', name='title')
+                                    .form-group
+                                        label.col-form-label(for='keywords_upload') Keywords :
+                                        input#keywords_upload.form-control(type='text', title='', maxlength='40', required='', name='keywords')
+                                    .form-group
+                                        label.col-form-label(for='category_upload') Category :
+                                            select#category_upload.custom-select(required='', name='category')
+                                                option(selected='', disabled='') -
+                                                option(value='مغز و اعصاب')  مغز و اعصاب
+                                                option(value="ارتوپدی") ارتوپدی
+                                                option(value="داخلی") داخلی
+                                                option(value="قلب و عروق") قلب و عروق
+                                    .form-group
+                                        label.col-form-label(for='doctor_upload') Doctor's Name :
+                                        input#doctor_upload.form-control(type='text', title='', maxlength='22', required='', name='doctor')
+                                    .form-group
+                                        label.col-form-label(for='description_upload') Description:
+                                        textarea#description_upload.form-control(title='', maxlength='100', required='', name='description')
+                                    .form-group
+                                        label.col-form-label(for='file_upload') Select File to Upload:
+                                        input#file_upload.form-control-file(type='file' name='file' class='form-control')
 
-                                div.row
-                                    div.col-12
-                                        #upload_progress.progress
-                                            #upload_progressbar.progress-bar(role='progressbar', style='width: 0%;', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')
-                                                span#upload_progressbar_text 25%
-                                div.row
-                                    div.col-12
-                                        div#upload_alert.alert
-                                            button.close(type='button', data-dismiss='alert') x
-                                            span
-                                                strong#upload_message
+                                    div.row
+                                        div.col-12
+                                            #upload_progress.progress
+                                                #upload_progressbar.progress-bar(role='progressbar', style='width: 0%;', aria-valuenow='0', aria-valuemin='0', aria-valuemax='100')
+                                                    span#upload_progressbar_text 25%
+                                    div.row
+                                        div.col-12
+                                            div#upload_alert.alert
+                                                button.close(type='button', data-dismiss='alert') x
+                                                span
+                                                    strong#upload_message
 
-                            .modal-footer
-                                button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-                                button.btn.btn-primary(type='submit' id='upload_button') Upload
-        // navbar
-        nav.navbar.sticky-top.navbar-expand-xl.navbar-dark
-            a.navbar-brand(href='#')
-                img(src='images/logo-main-blue.gif')
-            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsCollapsible', aria-controls='navbarsCollapsible', aria-expanded='false', aria-label='Toggle navigation')
-                span.navbar-toggler-icon
-            #navbarsCollapsible.collapse.navbar-collapse
-                ul.navbar-nav
-                    li.nav-item
-                        form
-                            input.form-control(type='text', placeholder='Search')
-                    li.nav-item.active
-                        button.btn.btn-primary(type='button', href='#')
-                            | Home
-                            span.sr-only (current)
-                    li.nav-item.dropdown
-                        button.btn.btn-primary.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Account
-                        .dropdown-menu(aria-labelledby='navbarDropdown')
+                                .modal-footer
+                                    button.btn.btn-secondary(type='button', data-dismiss='modal') Close
+                                    button.btn.btn-primary(type='submit' id='upload_button') Upload
+            // navbar
+            nav.navbar.sticky-top.navbar-expand-xl.navbar-dark
+                a.navbar-brand(href='#')
+                    img(src='images/logo-main-blue.gif')
+                button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsCollapsible', aria-controls='navbarsCollapsible', aria-expanded='false', aria-label='Toggle navigation')
+                    span.navbar-toggler-icon
+                #navbarsCollapsible.collapse.navbar-collapse
+                    ul.navbar-nav
+                        li.nav-item
+                            form
+                                input.form-control(type='text', placeholder='Search')
+                        li.nav-item.active
+                            button.btn.btn-primary(type='button', href='#')
+                                | Home
+                                span.sr-only (current)
+                        li.nav-item.dropdown
+                            button.btn.btn-primary.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Account
+                            .dropdown-menu(aria-labelledby='navbarDropdown')
+                                if username
+                                    button.dropdown-item.btn.btn-primary(type='button', href='/history') History
+                                        .dropdown-divider
+                                    button.dropdown-item.btn.btn-primary(type='button', data-toggle='modal', data-target='#logout_modal') Log Out
+                                else
+                                    button.dropdown-item.btn.btn-primary(type='button', data-toggle='modal', data-target='#login_modal') Sign In
+                                    button.dropdown-item.btn.btn-primary(type='button', data-toggle='modal', data-target='#signup_modal') Sign Up
+                                if bCanUpload
+                                    button.dropdown-item.btn.btn-primary(type='button', data-toggle='modal', data-target='#upload_modal') Upload
+                        li.nav-item.dropdown
+                            button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') مقالات
+                            .dropdown-menu(aria-labelledby='navbarDropdown')
+                                a.dropdown-item(href='#') -
+                        li.nav-item.dropdown
+                            button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') دروس دانشگاهی
+                            .dropdown-menu(aria-labelledby='navbarDropdown')
+                                a.dropdown-item(href='#') -
+                        li.nav-item.dropdown
+                            button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') تخصص ها
+                            .dropdown-menu.text-right(aria-labelledby='navbarDropdown')
+                                a.dropdown-item(href='#') ارتوپدی
+                                a.dropdown-item(href='#') مغز و اعصاب
+                                a.dropdown-item(href='#') قلب و عروق
+                                a.dropdown-item(href='#') اورولوژی
+                                a.dropdown-item(href='#') آندوسکوپی
+                                a.dropdown-item(href='#') زنان و زایمان
+                                a.dropdown-item(href='#') دندان پزشکی
+                                a.dropdown-item(href='#') زیبایی
+                                a.dropdown-item(href='#') چشم
+                                a.dropdown-item(href='#') جراحی داخلی
+                        li.nav-item.dropdown
+                            button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') اخبار
+                            .dropdown-menu(aria-labelledby='navbarDropdown')
+                                a.dropdown-item(href='#') -
+            // bellow navbar
+            .container-fluid(style='margin: 0')
+                .row
+                    #main-body.col-sm-12.main-body
+                       .main-grids
                             if username
-                                button.dropdown-item.btn.btn-primary(type='button', href='/history') History
-                                    .dropdown-divider
-                                button.dropdown-item.btn.btn-primary(type='button', data-toggle='modal', data-target='#logout_modal') Log Out
+                                .welcome-grid
+                                    h1 Welcome #{username}
                             else
-                                button.dropdown-item.btn.btn-primary(type='button', data-toggle='modal', data-target='#login_modal') Sign In
-                                button.dropdown-item.btn.btn-primary(type='button', data-toggle='modal', data-target='#signup_modal') Sign Up
-                            if bCanUpload
-                                button.dropdown-item.btn.btn-primary(type='button', data-toggle='modal', data-target='#upload_modal') Upload
-                    li.nav-item.dropdown
-                        button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') مقالات
-                        .dropdown-menu(aria-labelledby='navbarDropdown')
-                            a.dropdown-item(href='#') -
-                    li.nav-item.dropdown
-                        button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') دروس دانشگاهی
-                        .dropdown-menu(aria-labelledby='navbarDropdown')
-                            a.dropdown-item(href='#') -
-                    li.nav-item.dropdown
-                        button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') تخصص ها
-                        .dropdown-menu.text-right(aria-labelledby='navbarDropdown')
-                            a.dropdown-item(href='#') ارتوپدی
-                            a.dropdown-item(href='#') مغز و اعصاب
-                            a.dropdown-item(href='#') قلب و عروق
-                            a.dropdown-item(href='#') اورولوژی
-                            a.dropdown-item(href='#') آندوسکوپی
-                            a.dropdown-item(href='#') زنان و زایمان
-                            a.dropdown-item(href='#') دندان پزشکی
-                            a.dropdown-item(href='#') زیبایی
-                            a.dropdown-item(href='#') چشم
-                            a.dropdown-item(href='#') جراحی داخلی
-                    li.nav-item.dropdown
-                        button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') اخبار
-                        .dropdown-menu(aria-labelledby='navbarDropdown')
-                            a.dropdown-item(href='#') -
-
-        .container-fluid(style='margin: 0')
-            .row
-                #main-body.col-sm-12.main-body
-                   .main-grids
-                        if username
-                            .welcome-grid
-                                h1 Welcome #{username}
-                        else if errorStatus === -1
-                            .welcome-grid
-                                h1 Wrong Username or Password
-                        else if errorStatus !== null
-                            .welcome-grid
-                                h1 contact support # #{errorStatus}
-                        .banner-grid.container-fluid
-                            .row
-                                .col-4
-                                    h1 Suranus
-                                    p Watch. Learn. Repeat.
-                                .col-auto
-                                    img(src='images/menu-animated.gif', alt='')
+                                .welcome-grid
+                                    h1 Welcome Guest
+                            .banner-grid.container-fluid
+                                .row
+                                    .col-4
+                                        h1 Suranus
+                                        p Watch. Learn. Repeat.
+                                    .col-auto
+                                        img(src='images/menu-animated.gif', alt='')
 
 
-        block content
+            block content
         script(src='javascripts/parsley.min.js')
         script(src='javascripts/upload_progressbar.js')
+        script(src='javascripts/signup_submit.js')
         script.
             $(function () {
                 $("[class='form-control tooltip-custom']").tooltip();
