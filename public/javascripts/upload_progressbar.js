@@ -2,6 +2,8 @@ $(document).ready(function () {
 
 	let progressbar = $("#upload_progressbar");
 	let progressbarText = $("#upload_progressbar_text");
+	$('#upload_progress').hide();
+	$('#upload_alert').hide();
 
 	let showInfo = function(message){
 		$('#upload_progress').hide();

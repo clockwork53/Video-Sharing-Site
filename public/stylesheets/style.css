@@ -10,6 +10,12 @@ nav {
     background-color: #508fdc;
 }
 /**
+    modal elements
+ */
+input#file_upload {
+    height: auto;
+}
+/**
     navbar stuff
  */
 li.nav-item {
