@@ -32,8 +32,9 @@ $(document).ready(function () {
 			}
 		};
 
-		ajaxReq.onerror = function(){
-			showInfo('An error occurred while submitting the form. Maybe your file is too big');
+		ajaxReq.onerror = function(err){
+			showInfo(err);
+			//showInfo('An error occurred while submitting the form. Maybe your file is too big');
 		};
 
 		ajaxReq.onload = function(){

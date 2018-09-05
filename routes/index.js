@@ -14,6 +14,7 @@ passcheck.is().min(6)
 	.has().not().spaces()
 	.is().not().oneOf(['1234567']);
 //TODO: add guest mode... maybe?
+//TODO: Use ajax to let user know what went wrong
 /* POST login */
 router.post('/login',(req, res) => {
 
@@ -61,6 +62,11 @@ router.post('/signup',(req, res) => {
 			privilege:	3
 		};
 		db.register_db(User, (err,status)=>{
+			// noinspection JSUnresolvedVariable
+			// noinspection JSUnresolvedVariable
+			// noinspection JSUnresolvedVariable
+			// noinspection JSUnresolvedVariable
+			// noinspection JSUnresolvedVariable
 			req.session.error = err;
 			res.redirect('/');
 		});
@@ -128,7 +134,8 @@ router.post('/upload', multer(multerConfig).single('file'), (req, res)=>{
 			description: req.body.description,
 			fileAddr: req.file.filename
 		};
-		db.upload_video(Video, ()=>{
+		db.upload_video(Video, (err)=>{
+			res.error = err;
 			res.redirect('/');
 		});
 	}

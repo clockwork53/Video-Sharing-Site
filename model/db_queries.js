@@ -39,22 +39,25 @@ exports.register_db = function register_db(user, callback) {
 		});
 	}
 };
-
+//TODO: check for duplicates
 exports.upload_video = function upload_video(video, callback) {
 	if(!bConnected)
 		return -1;
 	else{
-		connection.query("SELECT type FROM users WHERE username = ?",
+		connection.query("SELECT type, uuid FROM users WHERE username = ?",
 			[video.username],
-			(err)=>{
-			if(err)
-				callback(err);
-			else if(!err)
-				connection.query("INSERT INTO videos (title, category, description, uuid, perma_link, keywords, doctor_name) VALUES (?, ?, ?, ?, ?, ?, ?)",
-					[video.title, video.category, video.description, video.username, video.fileAddr, video.keywords, video.doctor],
-					(err)=>{
-						callback(err);
-				});
+			(err, rows)=> {
+				if (err)
+					callback(err);
+				else if(!(rows[0].type === 1))
+					callback('You are not Authorized to upload Videos');
+				else if (!err && rows[0].type === 1) {
+					connection.query("INSERT INTO videos (title, category, description, uuid, perma_link, keywords, doctor_name) VALUES (?, ?, ?, ?, ?, ?, ?)",
+						[video.title, video.category, video.description, rows[0].uuid, video.fileAddr, video.keywords, video.doctor],
+						(err) => {
+							callback(err);
+					});
+				}
 		});
 	}
 };
