@@ -43,6 +43,5 @@ $(document).ready( ()=> {
 		}).fail(()=> {
 			showInfo(this.statusText);
 		});
-
 	})
 });

@@ -53,16 +53,9 @@ router.post('/signup',(req, res) => {
 	let lNameLength = validator.isLength(req.body.lName, 2, 15);
 	let telNumValid = validator.isNumeric(req.body.telNum);
 
-	if(!bodyEmpty
-		&&	usernameValid
-		&&  usernameLength
-		&&	passwordUncommon
-		&&	emailValid
-		&&	fNameValid
-		&&	fNameLength
-		&&	lNameValid
-		&&	lNameLength
-		&&	telNumValid
+	if( !bodyEmpty && usernameValid && usernameLength
+		&& passwordUncommon && emailValid && fNameValid
+		&& fNameLength && lNameValid &&	lNameLength && telNumValid
 	){
 		let User = {
 			username: req.body.username,
@@ -76,11 +69,21 @@ router.post('/signup',(req, res) => {
 		};
 		db.register_db(User, (err,status)=>{
 			res.json({'error': err, 'status': status});
-			res.redirect('/');
+			console.log(err);
 		});
-	}else
+	}else {
 		console.log('oops');
-		res.json({'error': });
+		res.json({
+			'error': 'notFatal',
+			'bodyEmpty': bodyEmpty,
+			'usernameInvalid': !usernameValid || !usernameLength,
+			'passwordCommon': !passwordUncommon,
+			'emailInvalid': !emailValid,
+			'fNameInvalid': !fNameLength || !fNameValid,
+			'lNameInvalid': !lNameLength || !lNameValid,
+			'telInvalid': !telNumValid
+		});
+	}
 });
 //TODO: check if anyone is actually logged in!
 /* POST logout*/

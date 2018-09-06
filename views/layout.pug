@@ -134,10 +134,14 @@ html
             else
                 // logout modal
                 #logout_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel', aria-hidden='true')
-                    .modal-dialog.modal-sm
+                    .modal-dialog
                         .modal-content
-                            form#logout_form(action='/logout', method='post')
-                                button.btn.btn-primary(type='submit') Log Out
+                            .modal-header
+                                h3 Logout ?
+                            .modal-body
+                            .modal-footer
+                                form#logout_form(action='/logout', method='post')
+                                    button.btn.btn-primary(type='submit' class='btn btn-danger') Log Out
             if bCanUpload
                 // upload modal
                 #upload_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
@@ -190,6 +194,16 @@ html
                                 .modal-footer
                                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                                     button.btn.btn-primary(type='submit' id='upload_button') Upload
+            #message_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='mySmallModalLabel', aria-hidden='true')
+                .modal-dialog
+                    .modal-content
+                        .modal-header
+                            h4#message_title.modal-title
+                            button(type='button' class='close' data-dismiss='modal') &times;
+                        .modal-body
+                            #message_body
+                        .modal-footer
+                            botton(type='button' class='btn btn-danger' data-dismiss='modal') Close
             // navbar
             nav.navbar.sticky-top.navbar-expand-xl.navbar-dark
                 a.navbar-brand(href='#')

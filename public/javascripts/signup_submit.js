@@ -26,13 +26,38 @@ $(document).ready( ()=> {
 			cache: false,
 			processData: false,
 			async: true,
-		}).done(() => {
+		}).done((response) => {
 			$('#loading-banner').addClass('hidden');
 			$('#main-page').removeClass('hidden');
-			$('#signup_modal').modal('hide');
-		}).fail(() => {
+			if(response.error === false){
+				$('#signup_modal').modal('hide');
+				$('#message_modal').modal('show');
+				$('#message_title').text('Success');
+				$('#message_body').html('<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#login_modal">Sign In</button>');
+			}else if(response.error === 'notFatal'){
+				$('#message_modal').modal('show');
+				$('#message_title').text('Error');
+				if(response.bodyEmpty)
+					$('#message_body').html('<p> Please fill the form before submitting!');
+				if(response.usernameInvalid)
+					$('#message_body').append('<br/> Invalid Username!');
+				if(response.emailInvalid)
+					$('#message_body').append('<br/> Invalid email!');
+				if(response.fNameInvalid)
+					$('#message_body').append('<br/> Invalid First Name!');
+				if(response.lNameInvalid)
+					$('#message_body').append('<br/> Invalid Last Name!');
+				if(response.telInvalid)
+					$('#message_body').append('<br/> Invalid Tel Number!');
+				if(response.passwordCommon)
+					$('#message_body').append('<br/> Your Password is very weak please Choose a better password');
+			}else{
+				alert(response.error.sqlMessage);
+			}
+		}).fail((response) => {
 			$('#loading-banner').addClass('hidden');
 			$('#main-page').removeClass('hidden');
+			alert('oops something went wrong! try again some other time');
 		});
 	})
 });
