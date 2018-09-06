@@ -36,7 +36,6 @@ router.post('/login',(req, res) => {
 
 	}
 });
-//TODO: use ajax to let user know what went wrong (duplicate name, email, etc)
 /* POST signup */
 router.post('/signup',(req, res) => {
 	console.log(req.body);

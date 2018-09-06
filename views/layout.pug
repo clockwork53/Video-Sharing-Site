@@ -56,9 +56,15 @@ html
                                     .form-group
                                         label.col-form-label(for='password_login') Password :
                                         input#password_login.form-control(type='password', title='', minlength='6', maxlength='20', required='', name='password')
+                                    .row
+                                        div.col-12
+                                            div#login_alert.alert.hidden
+                                                button.close(type='button', data-dismiss='alert') x
+                                                span
+                                                    strong#login_message
                                 .modal-footer
                                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
-                                    button.btn.btn-primary(type='submit') Login
+                                    button.btn.btn-primary(type='submit' id='login_button') Login
                 // signup modal
                 #signup_modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalCenterTitle', aria-hidden='true')
                     .modal-dialog.modal-dialog-centered(role='document')
@@ -243,6 +249,7 @@ html
         script(src='javascripts/parsley.min.js')
         script(src='javascripts/upload_progressbar.js')
         script(src='javascripts/signup_submit.js')
+        //script(src='javascripts/login_submit.js')
         script.
             $(function () {
                 $("[class='form-control tooltip-custom']").tooltip();

@@ -16,29 +16,33 @@ $(document).ready( ()=> {
 		event.stopImmediatePropagation();
 
 		$('#upload_progress').show();
-		let form = $('#upload_form')[0];
-		let uploadData = new FormData(form);
+		let uploadForm = $('#upload_form')[0];
+		let uploadData = new FormData(uploadForm);
 
-		let ajaxReq = new XMLHttpRequest();
-		ajaxReq.open('POST', '/upload', true);
-
-		ajaxReq.upload.onprogress = (progress)=> {
-			if(progress.lengthComputable){
-				let percentage = (progress.loaded / progress.total) * 100;
-				progressbar.attr({'style':'width: '+ percentage +'%;', 'aria-valuenow': percentage});
-				progressbarText.text(Math.round(percentage) + '%');
-			}
-		};
-
-		ajaxReq.onerror = (err)=> {
-			showInfo(err);
-			//showInfo('An error occurred while submitting the form. Maybe your file is too big');
-		};
-
-		ajaxReq.onload = ()=> {
+		$.ajax({
+			xhr: ()=> {
+				let ajaxUploadReq = new window.XMLHttpRequest();
+				ajaxUploadReq.upload.addEventListener('progress', (progress)=> {
+					if(progress.lengthComputable){
+						let percentage = (progress.loaded / progress.total) * 100;
+						progressbar.attr({'style':'width: '+ percentage +'%;', 'aria-valuenow': percentage});
+						progressbarText.text(Math.round(percentage) + '%');
+					}
+				}, false);
+				return ajaxUploadReq;
+			},
+			url: '/upload',
+			type: 'POST',
+			data: uploadData,
+			cache: false,
+			contentType: false,
+			processData: false,
+			async: true,
+		}).done(()=> {
+			showInfo('Success');
+		}).fail(()=> {
 			showInfo(this.statusText);
-		};
+		});
 
-		ajaxReq.send(uploadData);
 	})
 });
