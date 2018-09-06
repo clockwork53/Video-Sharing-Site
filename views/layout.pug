@@ -38,7 +38,6 @@ html
                         .dot
                         .dot
                         .lading
-
         #main-page
             if !username
                 // login modal
@@ -100,6 +99,12 @@ html
                                     .form-group
                                         label.col-form-label(for='re_password_signup') Confirm Password :
                                         input#re_password_signup.form-control(type='password', data-parsley-equalto='#password_signup', required='')
+                                    .row
+                                        div.col-12
+                                            div#signup_alert.alert.hidden
+                                                button.close(type='button', data-dismiss='alert') x
+                                                span
+                                                    strong#signup_message
                                 .modal-footer
                                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                                     button.btn.btn-primary(type='submit' id='signup_button') Sign Up

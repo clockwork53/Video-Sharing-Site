@@ -19,11 +19,14 @@ $(document).ready( ()=> {
 		ajaxReq.ontimeout = ()=> {
 			$('#loading-banner').addClass('hidden');
 			$('#main-page').removeClass('hidden');
-
+			$('#signup_alert').removeClass('hidden');
+			$('#signup_message').text('Timeout Try again');
 		};
-		ajaxReq.onerror = ()=> {
+		ajaxReq.onerror = (err)=> {
 			$('#loading-banner').addClass('hidden');
 			$('#main-page').removeClass('hidden');
+			$('#signup_alert').removeClass('hidden');
+			$('#signup_message').text(err);
 		};
 		ajaxReq.send(signupData);
 	})
