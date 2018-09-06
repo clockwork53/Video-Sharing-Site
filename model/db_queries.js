@@ -14,13 +14,13 @@ connection.connect(function (err) {
 
 exports.login_db = function login_db(user, callback) {
 	if (!bConnected)
-		return -1;
+		callback('DB not connected');
 	else{
 		connection.query("SELECT * FROM users WHERE username = ? AND password = ?",
 			[user.username, user.password],
 			(err, rows) =>{
 				if(!rows[0]) {
-					callback(-1);
+					callback("Username and Password Don't match");
 				}else {
 					callback(err, rows[0].username, rows[0].type);
 				}
@@ -30,7 +30,7 @@ exports.login_db = function login_db(user, callback) {
 
 exports.register_db = function register_db(user, callback) {
 	if(!bConnected)
-		return -1;
+		callback('DB not connected');
 	else{
 		connection.query("INSERT INTO users (fName, lName, telNum, email, username, password, alma, type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
 			[user.fName, user.lName, user.telNum, user.email, user.username, user.password, user.alma, user.privilege],
@@ -42,7 +42,7 @@ exports.register_db = function register_db(user, callback) {
 //TODO: check for duplicates
 exports.upload_video = function upload_video(video, callback) {
 	if(!bConnected)
-		return -1;
+		callback('DB not connected');
 	else{
 		connection.query("SELECT type, uuid FROM users WHERE username = ?",
 			[video.username],

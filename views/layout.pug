@@ -50,18 +50,25 @@ html
                                     span(aria-hidden='true') ×
                             form#login_form.needs-validation(action='/login', method='post', novalidate='')
                                 .modal-body
-                                    .form-group
-                                        label.col-form-label(for='username_login') Username :
-                                        input#username_login.form-control(type='text', title='', maxlength='15', required='', name='username')
-                                    .form-group
-                                        label.col-form-label(for='password_login') Password :
-                                        input#password_login.form-control(type='password', title='', minlength='6', maxlength='20', required='', name='password')
-                                    .row
-                                        div.col-12
-                                            div#login_alert.alert.hidden
-                                                button.close(type='button', data-dismiss='alert') x
-                                                span
-                                                    strong#login_message
+                                    .container-fluid
+                                        .row
+                                            .form-group.col-xl-6.col-sm-12
+                                                label.col-form-label(for='username_login') Username :
+                                                input#username_login.form-control(type='text', title='', maxlength='15', required='', name='username')
+                                            .form-group.col-xl-6.col-sm-12
+                                                label.col-form-label(for='password_login') Password :
+                                                input#password_login.form-control(type='password', title='', minlength='6', maxlength='20', required='', name='password')
+                                        .row
+                                            div.col-12
+                                                div#login_alert.alert.hidden
+                                                    button.close(type='button', data-dismiss='alert') x
+                                                    span
+                                                        strong#login_message
+                                        .row
+                                            .col-12
+                                                p Don't have an account?
+                                                    span
+                                                        a#login-hide(href='#signup_modal' data-toggle='modal') Sign Up
                                 .modal-footer
                                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                                     button.btn.btn-primary(type='submit' id='login_button') Login
@@ -75,42 +82,52 @@ html
                                     span(aria-hidden='true') ×
                             form#signup_form.needs-validation(action='/signup', method='post', novalidate='')
                                 .modal-body
-                                    .form-group
-                                        label.col-form-label(for='username_signup') Username :
-                                        input#username_signup.form-control(type='text', title='', maxlength='15', required='', name='username')
-                                    .form-group
-                                        label.col-form-label(for='email_signup') Email :
-                                        input#email_signup.form-control(type='email', title='', maxlength='25', required='', name='email')
-                                    .form-group
-                                        label.col-form-label(for='fName_signup') First Name :
-                                        input#fName_signup.form-control(type='text', title='', maxlength='20', required='', name='fName')
-                                    .form-group
-                                        label.col-form-label(for='lName_signup') Last Name :
-                                        input#lName_signup.form-control(type='text', title='', maxlength='22', required='', name='lName')
-                                    .form-group
-                                        label.col-form-label(for='telNum_signup') Telephone :
-                                        input#telNum_signup.form-control(type='tel', title='', minlength='7', maxlength='10', required='', name='telNum')
-                                    .form-group
-                                        label.col-form-label(for='alma_signup') Alma :
-                                        select#alma_signup.custom-select(required='', name='alma')
-                                            option(selected='', disabled='') -
-                                            option(value='md') master
-                                            option(value='phd') phd
-                                            option(value='bch') bch
-                                    .form-group
-                                        label.col-form-label(for='password_signup') Password :
-                                        input#password_signup.form-control.tooltip-custom(type='password', title='', minlength='6', maxlength='20', required='', name='password')
-                                        small.text-muted
-                                            | Must be 6-20 characters long.
-                                    .form-group
-                                        label.col-form-label(for='re_password_signup') Confirm Password :
-                                        input#re_password_signup.form-control(type='password', data-parsley-equalto='#password_signup', required='')
-                                    .row
-                                        div.col-12
-                                            div#signup_alert.alert.hidden
-                                                button.close(type='button', data-dismiss='alert') x
-                                                span
-                                                    strong#signup_message
+                                    .container-fluid
+                                        .row
+                                            .form-group.col-md-6
+                                                label.col-form-label(for='username_signup') Username :
+                                                input#username_signup.form-control(type='text', title='', maxlength='15', required='', name='username')
+                                            .form-group.col-md-6
+                                                label.col-form-label(for='email_signup') Email :
+                                                input#email_signup.form-control(type='email', title='', maxlength='25', required='', name='email')
+                                        .row
+                                            .form-group.col-md-6
+                                                label.col-form-label(for='fName_signup') First Name :
+                                                input#fName_signup.form-control(type='text', title='', maxlength='20', required='', name='fName')
+                                            .form-group.col-md-6
+                                                label.col-form-label(for='lName_signup') Last Name :
+                                                input#lName_signup.form-control(type='text', title='', maxlength='22', required='', name='lName')
+                                        .row
+                                            .form-group.col-sm-6
+                                                label.col-form-label(for='telNum_signup') Telephone :
+                                                input#telNum_signup.form-control(type='tel', title='', minlength='7', maxlength='10', required='', name='telNum')
+                                            .form-group.col-sm-6
+                                                label.col-form-label(for='alma_signup') Alma :
+                                                select#alma_signup.custom-select(required='', name='alma')
+                                                    option(selected='', disabled='') -
+                                                    option(value='md') master
+                                                    option(value='phd') phd
+                                                    option(value='bch') bch
+                                        .row
+                                            .form-group.col-sm-6
+                                                label.col-form-label(for='password_signup') Password :
+                                                input#password_signup.form-control.tooltip-custom(type='password', title='', minlength='6', maxlength='20', required='', name='password')
+                                                small.text-muted
+                                                    | Must be 6-20 characters long.
+                                            .form-group.col-sm-6
+                                                label.col-form-label(for='re_password_signup') Confirm Password :
+                                                input#re_password_signup.form-control(type='password', data-parsley-equalto='#password_signup', required='')
+                                        .row
+                                            div.col-12
+                                                div#signup_alert.alert.hidden
+                                                    button.close(type='button', data-dismiss='alert') x
+                                                    span
+                                                        strong#signup_message
+                                        .row
+                                            .col-12
+                                                p Already have an account?
+                                                    span
+                                                        a#signup-hide(href='#login_modal' data-toggle='modal') Sign In
                                 .modal-footer
                                     button.btn.btn-secondary(type='button', data-dismiss='modal') Close
                                     button.btn.btn-primary(type='submit' id='signup_button') Sign Up
@@ -190,7 +207,7 @@ html
                                 span.sr-only (current)
                         li.nav-item.dropdown
                             button.btn.btn-primary.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Account
-                            .dropdown-menu(aria-labelledby='navbarDropdown')
+                            .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdown')
                                 if username
                                     button.dropdown-item.btn.btn-primary(type='button', href='/history') History
                                         .dropdown-divider
@@ -202,15 +219,15 @@ html
                                     button.dropdown-item.btn.btn-primary(type='button', data-toggle='modal', data-target='#upload_modal') Upload
                         li.nav-item.dropdown
                             button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') مقالات
-                            .dropdown-menu(aria-labelledby='navbarDropdown')
+                            .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdown')
                                 a.dropdown-item(href='#') -
                         li.nav-item.dropdown
                             button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') دروس دانشگاهی
-                            .dropdown-menu(aria-labelledby='navbarDropdown')
+                            .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdown')
                                 a.dropdown-item(href='#') -
                         li.nav-item.dropdown
                             button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') تخصص ها
-                            .dropdown-menu.text-right(aria-labelledby='navbarDropdown')
+                            .dropdown-menu.dropdown-menu-right.text-right(aria-labelledby='navbarDropdown')
                                 a.dropdown-item(href='#') ارتوپدی
                                 a.dropdown-item(href='#') مغز و اعصاب
                                 a.dropdown-item(href='#') قلب و عروق
@@ -223,7 +240,7 @@ html
                                 a.dropdown-item(href='#') جراحی داخلی
                         li.nav-item.dropdown
                             button.btn.btn-dark.dropdown-toggle(role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') اخبار
-                            .dropdown-menu(aria-labelledby='navbarDropdown')
+                            .dropdown-menu.dropdown-menu-right(aria-labelledby='navbarDropdown')
                                 a.dropdown-item(href='#') -
             // bellow navbar
             .container-fluid(style='margin: 0')
@@ -249,10 +266,15 @@ html
         script(src='javascripts/parsley.min.js')
         script(src='javascripts/upload_progressbar.js')
         script(src='javascripts/signup_submit.js')
-        script(src='javascripts/login_submit.js')
         script.
             $(function () {
                 $("[class='form-control tooltip-custom']").tooltip();
+                $("#signup-hide").on('click', function () {
+                    $("#signup_modal").modal('hide');
+                });
+                $("#login-hide").on('click', function () {
+                    $("#login_modal").modal('hide');
+                });
             });
             $(".needs-validation").parsley({
                 errorClass: 'has-danger',

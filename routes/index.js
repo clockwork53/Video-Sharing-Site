@@ -17,7 +17,7 @@ passcheck.is().min(6)
 //TODO: Use ajax to let user know what went wrong
 /* POST login */
 router.post('/login',(req, res) => {
-	console.log(req.body);
+	console.log(req);
 	if(!validator.isEmpty(req.body.username)
 		&& validator.isAlphanumeric(req.body.username)
 		&&	passcheck.validate(req.body.password, {list: false})
@@ -27,28 +27,42 @@ router.post('/login',(req, res) => {
 			password: req.body.password
 		};
 		db.login_db(User, (err, username, privilege) => {
-			console.log(username + privilege);
-			req.session.username = username;
-			req.session.privilege = privilege;
-			req.session.error = err;
-			res.redirect('/');
+			if (!err) {
+				console.log(username + privilege);
+				req.session.username = username;
+				req.session.privilege = privilege;
+				res.redirect('/');
+			} else {
+				res.json({'error': err});
+				res.redirect('/');
+			}
 		});
-
 	}
 });
 /* POST signup */
 router.post('/signup',(req, res) => {
 	console.log(req.body);
-	if(!(validator.isEmpty(req.body.username))
-		&&	validator.isAlphanumeric(req.body.username)
-		&&  validator.isLength(req.body.username, 5, 20)
-		&&	passcheck.validate(req.body.password, {list: false})
-		&&	validator.isEmail(req.body.email)
-		&&	validator.isAlpha(req.body.fName)
-		&&	validator.isLength(req.body.fName, 2, 15)
-		&&	validator.isAlpha(req.body.lName)
-		&&	validator.isLength(req.body.lName, 2, 15)
-		&&	validator.isNumeric(req.body.telNum)
+	let bodyEmpty = validator.isEmpty(req.body.username);
+	let usernameValid = validator.isAlphanumeric(req.body.username);
+	let usernameLength = validator.isLength(req.body.username, 5, 20);
+	let passwordUncommon = passcheck.validate(req.body.password, {list: false});
+	let emailValid = validator.isEmail(req.body.email);
+	let fNameValid = validator.isAlpha(req.body.fName);
+	let fNameLength = validator.isLength(req.body.fName, 2, 15);
+	let lNameValid = validator.isAlpha(req.body.lName);
+	let lNameLength = validator.isLength(req.body.lName, 2, 15);
+	let telNumValid = validator.isNumeric(req.body.telNum);
+
+	if(!bodyEmpty
+		&&	usernameValid
+		&&  usernameLength
+		&&	passwordUncommon
+		&&	emailValid
+		&&	fNameValid
+		&&	fNameLength
+		&&	lNameValid
+		&&	lNameLength
+		&&	telNumValid
 	){
 		let User = {
 			username: req.body.username,
@@ -61,11 +75,12 @@ router.post('/signup',(req, res) => {
 			privilege:	3
 		};
 		db.register_db(User, (err,status)=>{
-			req.session.error = err;
+			res.json({'error': err, 'status': status});
 			res.redirect('/');
 		});
 	}else
 		console.log('oops');
+		res.json({'error': });
 });
 //TODO: check if anyone is actually logged in!
 /* POST logout*/
