@@ -17,7 +17,7 @@ passcheck.is().min(6)
 //TODO: Use ajax to let user know what went wrong
 /* POST login */
 router.post('/login',(req, res) => {
-
+	console.log(req.body);
 	if(!validator.isEmpty(req.body.username)
 		&& validator.isAlphanumeric(req.body.username)
 		&&	passcheck.validate(req.body.password, {list: false})

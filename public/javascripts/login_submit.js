@@ -1,29 +1,31 @@
 $(document).ready( ()=> {
 
 	$('#login_button').on('click', (event)=> {
-		event.preventDefault();
-		event.stopImmediatePropagation();
 
 		$('#loading-banner').removeClass('hidden');
 		$('#main-page').addClass('hidden');
 
-		let loginForm = $('#login_form')[0];
-		let loginData = new FormData(loginForm);
+		let loginForm = $('#login_form');
 		$.ajax({
-			url: '/login',
-			type: 'POST',
-			data: loginData,
+			url: loginForm.attr('action'),
+			type: loginForm.attr('method'),
+			dataType: 'JSON',
+			data: new FormData(loginForm),
 			cache: false,
 			contentType: false,
 			processData: false,
 			async: true,
-		}).done( ()=> {
-			$('#loading-banner').addClass('hidden');
-			$('#main-page').removeClass('hidden');
-		}).fail( ()=> {
-			$('#loading-banner').addClass('hidden');
-			$('#main-page').removeClass('hidden');
-			$('#login_message').text(this.statusText);
+			success: (response)=> {
+				$('#loading-banner').addClass('hidden');
+				$('#main-page').removeClass('hidden');
+			},
+			fail: (jqXHR, textStatus, errorThrown)=> {
+				$('#loading-banner').addClass('hidden');
+				$('#main-page').removeClass('hidden');
+				$('#login_message').text(textStatus);
+			}
 		});
+		event.preventDefault();
+		event.stopImmediatePropagation();
 	})
 });

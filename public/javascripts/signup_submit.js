@@ -1,29 +1,32 @@
 $(document).ready( ()=> {
 
 	$('#signup_button').on('click', (event)=> {
-		event.preventDefault();
-		event.stopImmediatePropagation();
 
 		$('#loading-banner').removeClass('hidden');
 		$('#main-page').addClass('hidden');
 
-		let signupForm = $('#signup_form')[0];
-		let signupData = new FormData(signupForm);
+		let signupForm = $('#signup_form');
+
 		$.ajax({
-			url: '/signup',
-			type: 'POST',
-			data: signupData,
+			url: signupForm.attr('action'),
+			type: signupForm.attr('method'),
+			data: new FormData(signupForm),
+			dataType: 'JSON',
 			cache: false,
 			contentType: false,
 			processData: false,
 			async: true,
-		}).done( ()=> {
-			$('#loading-banner').addClass('hidden');
-			$('#main-page').removeClass('hidden');
-		}).fail( ()=> {
-			$('#loading-banner').addClass('hidden');
-			$('#main-page').removeClass('hidden');
-			$('#signup_message').text(this.statusText);
+			success: (response)=> {
+				$('#loading-banner').addClass('hidden');
+				$('#main-page').removeClass('hidden');
+			},
+			fail: (jqXHR, textStatus, errorThrown)=> {
+				$('#loading-banner').addClass('hidden');
+				$('#main-page').removeClass('hidden');
+				$('#signup_message').text(textStatus);
+			}
 		});
+		event.preventDefault();
+		event.stopImmediatePropagation();
 	})
 });
