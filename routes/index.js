@@ -86,7 +86,6 @@ router.post('/signup',(req, res) => {
 	}
 });
 
-//TODO: check if anyone is actually logged in!
 /* POST logout*/
 router.post('/logout',(req, res)=>{
 	req.session.destroy((err)=>{
