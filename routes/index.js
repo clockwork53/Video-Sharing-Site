@@ -5,7 +5,8 @@ const router = express.Router();
 const db = require('../model/db_queries');
 const multer = require('multer');
 //TODO: use passport library for authentication
- /*
+
+/*
  * 	set conditions for password
  * */
 let passcheck = new passwordValidator();
@@ -13,11 +14,10 @@ passcheck.is().min(6)
 	.is().max(20)
 	.has().not().spaces()
 	.is().not().oneOf(['1234567']);
+
 //TODO: add guest mode... maybe?
-//TODO: Use ajax to let user know what went wrong
 /* POST login */
 router.post('/login',(req, res) => {
-	console.log(req);
 	if(!validator.isEmpty(req.body.username)
 		&& validator.isAlphanumeric(req.body.username)
 		&&	passcheck.validate(req.body.password, {list: false})
@@ -31,14 +31,14 @@ router.post('/login',(req, res) => {
 				console.log(username + privilege);
 				req.session.username = username;
 				req.session.privilege = privilege;
-				res.redirect('/');
+				res.json({'error': false});
 			} else {
 				res.json({'error': err});
-				res.redirect('/');
 			}
 		});
 	}
 });
+
 /* POST signup */
 router.post('/signup',(req, res) => {
 	console.log(req.body);
@@ -85,6 +85,7 @@ router.post('/signup',(req, res) => {
 		});
 	}
 });
+
 //TODO: check if anyone is actually logged in!
 /* POST logout*/
 router.post('/logout',(req, res)=>{

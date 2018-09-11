@@ -43,7 +43,7 @@ $(document).ready( ()=> {
 						$('#message_body').html('<p> Please fill the form before submitting!');
 					else {
 						if (response.usernameInvalid)
-							$('#message_body').append('<br/> Invalid Username!');
+							$('#message_body').append('<p> Invalid Username!');
 						if (response.emailInvalid)
 							$('#message_body').append('<br/> Invalid email!');
 						if (response.fNameInvalid)
