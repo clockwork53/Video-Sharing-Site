@@ -39,18 +39,20 @@ $(document).ready( ()=> {
 				$('#message_title').text('Error');
 				if(response.bodyEmpty)
 					$('#message_body').html('<p> Please fill the form before submitting!');
-				if(response.usernameInvalid)
-					$('#message_body').append('<br/> Invalid Username!');
-				if(response.emailInvalid)
-					$('#message_body').append('<br/> Invalid email!');
-				if(response.fNameInvalid)
-					$('#message_body').append('<br/> Invalid First Name!');
-				if(response.lNameInvalid)
-					$('#message_body').append('<br/> Invalid Last Name!');
-				if(response.telInvalid)
-					$('#message_body').append('<br/> Invalid Tel Number!');
-				if(response.passwordCommon)
-					$('#message_body').append('<br/> Your Password is very weak please Choose a better password');
+				else {
+					if (response.usernameInvalid)
+						$('#message_body').append('<br/> Invalid Username!');
+					if (response.emailInvalid)
+						$('#message_body').append('<br/> Invalid email!');
+					if (response.fNameInvalid)
+						$('#message_body').append('<br/> Invalid First Name!');
+					if (response.lNameInvalid)
+						$('#message_body').append('<br/> Invalid Last Name!');
+					if (response.telInvalid)
+						$('#message_body').append('<br/> Invalid Tel Number!');
+					if (response.passwordCommon)
+						$('#message_body').append('<br/> Your Password is very weak please Choose a better password');
+				}
 			}else{
 				alert(response.error.sqlMessage);
 			}
