@@ -1,5 +1,43 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to #{title}
+    .container-fluid
+        .row
+            .col-12
+                .row
+                    .col-4
+                        .card
+                            img.card-img-top.img-fluid(src='images/edgeOfTomorrow.jpg' style='height: auto; width: 100%;')
+                            .card-img-overlay
+                                .video-length
+                                    h5.fa.fa-clock-o(aria-hidden="true") 5:00
+                        .card-footer
+                            .row.justify-content-between
+                                .col-auto
+                                    h5 title
+                                .col-auto
+                                    h5 views
+                    .col-4
+                        .card
+                            img.card-img-top.img-fluid(src='images/laser1.jpg' style='height: auto; width: 100%;')
+                            .card-img-overlay
+                                .video-length
+                                    h5.fa.fa-clock-o(aria-hidden="true") 3:35
+                        .card-footer
+                            .row.justify-content-between
+                                .col-auto
+                                    h5 title
+                                .col-auto
+                                    h5 views
+                    .col-4
+                        .card
+                            img.card-img-top.img-fluid(src='images/laser1.jpg' style='height: auto; width: 100%;')
+                            .card-img-overlay
+                                .video-length
+                                    h5.fa.fa-clock-o(aria-hidden="true") 3:35
+                        .card-footer
+                            .row.justify-content-between
+                                .col-auto
+                                    h5 title
+                                .col-auto
+                                    h5 views

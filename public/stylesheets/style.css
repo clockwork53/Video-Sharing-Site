@@ -46,6 +46,17 @@ ul.navbar-nav {
     margin-left: auto;
 }
 /**
+    video cards
+ */
+div.video-length {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 0;
+}
+div.video-length h5 {
+    color: white;
+}
+/**
     main grids
  */
 div.main-body {
@@ -92,6 +103,9 @@ div.news-grid ul {
 /**
     glyphicons
  */
+h5.fa.fa-clock-o::before{
+    padding-right: 3px;
+}
 .glyphicon {
     position: relative;
     top: 2px;
