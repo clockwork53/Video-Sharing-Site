@@ -4,7 +4,6 @@
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
-
 ::-webkit-scrollbar-thumb {
     background: #888;
 }
@@ -215,9 +214,7 @@ div.news-grid ul {
     background: #ff0095 none repeat scroll 0 0;
 }
 #loader .lading {
-    background-image: url("../images/loading.gif");
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
+    background: url("../images/loading.gif") no-repeat 50% 50%;
     bottom: -40px;
     height: 20px;
     left: 0;
