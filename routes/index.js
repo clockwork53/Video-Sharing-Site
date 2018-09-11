@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../model/db_queries');
 const multer = require('multer');
+const default_video_thumbs = {link: 'images/infinite-loader.gif', length: '4:20', title: ';)', views: 'Nan'};
 //TODO: use passport library for authentication
 
 /*
@@ -158,7 +159,8 @@ router.get('/', function(req, res, next) {
 
 	res.render('index',
 		{title : 'Suranus', username : req.session.username ,
-		bCanUpload: req.session.privilege===1 ,errorStatus: req.session.error});
+		bCanUpload: req.session.privilege===1 ,errorStatus: req.session.error,
+		video:default_video_thumbs});
 });
 
 

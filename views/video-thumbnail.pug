@@ -1,12 +1,12 @@
 .col-4.video-thumbnail
     .card
-        img.card-img-top.img-fluid(src='images/edgeOfTomorrow.jpg' style='height: auto; width: 100%;')
+        img.card-img-top.img-fluid(src= video.link style='height: auto; width: 100%;')
         .card-img-overlay
             .video-length
-                h5.fa.fa-clock-o(aria-hidden="true") 5:00
+                h5.fa.fa-clock-o(aria-hidden="true")= video.length
     .card-footer
         .row.justify-content-between
             .col-auto
-                h5 title
+                h5= video.title
             .col-auto
-                h5 views
+                h5= video.views

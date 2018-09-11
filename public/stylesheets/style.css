@@ -248,3 +248,56 @@ h5.fa.fa-clock-o::before{
         transform: scale(1);
     }
 }
+/**
+    video loader
+ */
+@keyframes lds-eclipse {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes lds-eclipse {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+.lds-eclipse {
+    position: relative;
+}
+.lds-eclipse div {
+    position: absolute;
+    -webkit-animation: lds-eclipse 1.3s linear infinite;
+    animation: lds-eclipse 1.3s linear infinite;
+    width: 80px;
+    height: 80px;
+    top: 60px;
+    left: 60px;
+    border-radius: 50%;
+    box-shadow: 0 6px 0 0 #1ba6e2;
+    -webkit-transform-origin: 40px 43px;
+    transform-origin: 40px 43px;
+}
+.lds-eclipse {
+    width: 200px !important;
+    height: 200px !important;
+    -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+    transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+}
