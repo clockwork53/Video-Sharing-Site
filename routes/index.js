@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../model/db_queries');
 const multer = require('multer');
-const default_video_thumbs = {link: 'images/infinite-loader.gif', length: '4:20', title: ';)', views: 'Nan'};
+const default_video_thumbs = {thumb: 'images/infinite-loader.gif', length: '4:20', title: ';)', views: 'Nan'};
 //TODO: use passport library for authentication
 
 /*
@@ -153,9 +153,28 @@ router.post('/upload', multer(multerConfig).single('file'), (req, res)=>{
 		});
 	}
 });
+/* GET recent videos*/
+router.get('/getVideo', (req,res)=> {
+	db.getVideo(0, 2, (err, rows)=> {
+		if(!err){
+			let result = [];
+			for (let i = 0; i < rows.length; i++) {
+				result.push({
+					'title': rows[i].title,
+					'description': rows[i].description,
+					'link': rows[i].perma_link,
+					'keywords': rows[i].keywords,
+					'doctor': rows[i].doctor_name,
+					'length': '4:20',
+					'views': 15000});
+			}
+			res.json(JSON.stringify(result));
+		}
+	})
+});
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next)=> {
 
 	res.render('index',
 		{title : 'Suranus', username : req.session.username ,

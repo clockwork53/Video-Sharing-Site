@@ -61,3 +61,33 @@ exports.upload_video = function upload_video(video, callback) {
 		});
 	}
 };
+
+exports.getVideo = function getVideo(category, limit, callback) {
+	if(!bConnected)
+		callback('DB not connected');
+	else {
+		if (category) {
+			connection.query("SELECT * FROM videos WHERE category = ? ORDER BY upload_date DESC LIMIT ?",
+				[category, limit],
+				(err, rows) => {
+					if (err)
+						callback(err);
+					else if (!rows)
+						callback('No Recent Videos!');
+					else
+						callback(null, rows);
+				});
+		}else{
+			connection.query("SELECT * FROM videos ORDER BY upload_date DESC LIMIT ?",
+				[limit],
+				(err, rows) => {
+					if (err)
+						callback(err);
+					else if (!rows)
+						callback('No Recent Videos!');
+					else
+						callback(null, rows);
+				});
+		}
+	}
+}

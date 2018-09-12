@@ -1,12 +1,14 @@
-.col-4.video-thumbnail
+.col-3.video-thumbnail(id= 'video-index-'+index)
     .card
-        img.card-img-top.img-fluid(src= video.link style='height: auto; width: 100%;')
-        .card-img-overlay
-            .video-length
-                h5.fa.fa-clock-o(aria-hidden="true")= video.length
+        a(href='#')
+            img.card-img-top.img-fluid(src= video.thumb style='height: auto; width: 100%;')
+            .card-img-overlay
+                .video-length
+                    h5.fa.fa-clock-o.video-length(aria-hidden="true")= video.length
     .card-footer
         .row.justify-content-between
             .col-auto
-                h5= video.title
+                h5.video-title= video.title
+                h6.fa.fa-user-md.video-doctor Doc
             .col-auto
-                h5= video.views
+                h5.video-views= video.views

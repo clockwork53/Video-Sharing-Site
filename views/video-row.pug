@@ -1,8 +1,9 @@
 
-.row
+.row(style='padding-top: 1em;')
     .col-12.video-column
         .row
             .col-auto.video-column-title
+                h5 Recent Uploads
         .row
-            each _ in Array(6)
+            each _,index in Array(8)
                 include video-thumbnail
