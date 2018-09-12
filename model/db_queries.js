@@ -52,8 +52,8 @@ exports.upload_video = function upload_video(video, callback) {
 				else if(!(rows[0].type === 1))
 					callback('You are not Authorized to upload Videos');
 				else if (!err && rows[0].type === 1) {
-					connection.query("INSERT INTO videos (title, category, description, uuid, perma_link, keywords, doctor_name) VALUES (?, ?, ?, ?, ?, ?, ?)",
-						[video.title, video.category, video.description, rows[0].uuid, video.fileAddr, video.keywords, video.doctor],
+					connection.query("INSERT INTO videos (title, category, description, uuid, perma_link, keywords, doctor_name, length) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+						[video.title, video.category, video.description, rows[0].uuid, video.fileAddr, video.keywords, video.doctor, video.fileLength],
 						(err) => {
 							callback(err);
 					});
@@ -62,7 +62,7 @@ exports.upload_video = function upload_video(video, callback) {
 	}
 };
 
-exports.getVideo = function getVideo(category, limit, callback) {
+exports.getRecentVideo = function getRecentVideo(category, limit, callback) {
 	if(!bConnected)
 		callback('DB not connected');
 	else {

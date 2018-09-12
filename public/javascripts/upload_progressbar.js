@@ -31,7 +31,7 @@ $(document).ready( ()=> {
 				}, false);
 				return ajaxUploadReq;
 			},
-			url: '/upload',
+			url: '/uploads/videoUpload',
 			type: 'POST',
 			data: uploadData,
 			cache: false,
