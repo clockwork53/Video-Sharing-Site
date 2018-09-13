@@ -3,7 +3,7 @@ $('.card-img-overlay').mouseenter(function () {
 	let showOverlay = ()=> {
 		$(this).show();
 	};
-	window.setTimeout(showOverlay, 5000);
+	window.setTimeout(showOverlay, 10000);
 });
 
 $('.thumbnail').hover(function() {

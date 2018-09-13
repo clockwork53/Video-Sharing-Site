@@ -56,7 +56,12 @@ $(document).ready( ()=> {
 							$('#message_body').append('<br/> Your Password is very weak please Choose a better password');
 					}
 				} else {
-					alert(response.error.sqlMessage);
+					$('#message_modal').modal('show');
+					$('#message_title').text('Error');
+					if (response.error === "Duplicate Email")
+						$('#message_body').html('<p> Duplicate email!');
+					if (response.error === "Duplicate Username")
+						$('#message_body').html('<br/> Duplicate Username!');
 				}
 			}).fail((response) => {
 				$('#loading-banner').addClass('hidden');

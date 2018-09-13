@@ -16,7 +16,6 @@ passcheck.is().min(6)
 	.has().not().spaces()
 	.is().not().oneOf(['1234567']);
 
-//TODO: add guest mode... maybe?
 /* POST login */
 router.post('/login',(req, res) => {
 	if(!validator.isEmpty(req.body.username)
@@ -42,7 +41,6 @@ router.post('/login',(req, res) => {
 
 /* POST signup */
 router.post('/signup',(req, res) => {
-	console.log(req.body);
 	let bodyEmpty = validator.isEmpty(req.body.username);
 	let usernameValid = validator.isAlphanumeric(req.body.username);
 	let usernameLength = validator.isLength(req.body.username, 5, 20);
@@ -69,11 +67,16 @@ router.post('/signup',(req, res) => {
 			privilege:	3
 		};
 		db.register_db(User, (err,status)=>{
-			res.json({'error': err, 'status': status});
-			console.log(err);
+			if(err && err.sqlMessage.includes("Duplicate entry")) {
+				if (err.sqlMessage.includes("email"))
+					res.json({'error': "Duplicate Email", 'status': status});
+				if (err.sqlMessage.includes("username"))
+					res.json({'error': "Duplicate Username", 'status': status});
+			}
+			else
+				res.json({'error': false, 'status': status});
 		});
 	}else {
-		console.log('oops');
 		res.json({
 			'error': 'notFatal',
 			'bodyEmpty': bodyEmpty,
