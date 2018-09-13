@@ -43,7 +43,7 @@ router.post('/videoUpload', multer(multerConfig).single('file'), (req, res)=>{
 		//TODO: check conditions for file upload
 		true
 	){
-		let videoHandle = ffmpeg(__dirname + '\\..\\public\\video-storage\\' + req.file.filename);
+		let videoHandle = ffmpeg(__dirname + '/../public/video-storage/' + req.file.filename);
 		videoHandle.ffprobe((err,data)=> {
 			if(!err){
 				let Video ={
@@ -56,6 +56,16 @@ router.post('/videoUpload', multer(multerConfig).single('file'), (req, res)=>{
 					fileAddr: req.file.filename,
 					fileLength: data.format.duration
 				};
+				videoHandle.noAudio()
+					.setStartTime(data.format.duration / 2)
+					.setDuration((data.format.duration / 2) + 5)
+					.outputOption("-vf", "scale=320:-1:flags=lanczos,fps=15")
+					.save(__dirname + '/../public/thumbnails/' + req.file.filename + '.gif');
+				videoHandle.screenshot({
+					count:1,
+					filename: req.file.filename+'.png',
+					folder: __dirname + '/../public/thumbnails/'
+				});
 				db.upload_video(Video, (err)=>{
 					res.error = err;
 					res.redirect('/');

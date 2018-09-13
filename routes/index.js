@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../model/db_queries');
-const ffmpeg = require('fluent-ffmpeg');
 const default_video_thumbs = {thumb: 'images/infinite-loader.gif', length: '4:20', title: ';)', views: 'Nan'};
 
 /* GET recent videos*/
 router.get('/getRecentVideo', (req,res)=> {
-	db.getRecentVideo(0, 2, (err, rows)=> {
+	db.getRecentVideo(0, 5, (err, rows)=> {
 		if(!err){
 			let result = [];
 			for (let i = 0; i < rows.length; i++) {
@@ -17,7 +16,9 @@ router.get('/getRecentVideo', (req,res)=> {
 					'keywords': rows[i].keywords,
 					'doctor': rows[i].doctor_name,
 					'length': rows[i].length,
-					'views': 15000});
+					'thumbnailStatic': 'thumbnails/'+rows[i].perma_link+'.png',
+					'thumbnailHover': 'thumbnails/'+rows[i].perma_link+'.gif',
+					'views': 0});
 			}
 			res.json(JSON.stringify(result));
 		}

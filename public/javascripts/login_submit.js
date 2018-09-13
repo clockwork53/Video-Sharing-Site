@@ -13,7 +13,6 @@ $(document).ready( ()=> {
 				username: $('#username_login').val(),
 				password: $('#password_login').val(),
 			};
-
 			$.ajax({
 				url: loginForm.attr('action'),
 				type: loginForm.attr('method'),
@@ -24,11 +23,11 @@ $(document).ready( ()=> {
 				processData: false,
 				async: true,
 			}).done((response) => {
-				$('#loading-banner').addClass('hidden');
-				$('#main-page').removeClass('hidden');
 				if (response.error === false) {
 					window.location = '/';
 				}else {
+					$('#loading-banner').addClass('hidden');
+					$('#main-page').removeClass('hidden');
 					$('#message_modal').modal('show');
 					$('#message_title').text('Error');
 					$('#message_body').html('<p>' + response.error + '</p>');
